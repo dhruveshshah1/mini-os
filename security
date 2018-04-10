@@ -1,0 +1,68 @@
+#include <iostream>
+#include <string.h>
+#include <stdlib.h>
+#include<fstream>
+#include<ctime>
+using namespace std;
+int strcmp(string a,string b);
+void clrscr()
+{
+    system("cls");
+}
+void login()
+{
+    string username,password,un,pw;
+    cout<<"Enter username:";
+    cin>>username;
+    cout<<"Enter password:";
+    cin>>password;
+    ifstream read;
+    read.open("username.txt",ios::app);
+    do{
+    getline(read, un);
+    getline(read, pw);
+    }while(un!=username);
+    cout<<un<<endl<<pw;
+    if(un==username && pw == password)
+    {
+        cout<<"logged in!";
+    }
+    else{
+        cout<<"Login failed!";
+
+    }
+}
+void reg()
+{
+    void log();
+        string username,password;
+        cout<<"Enter a user name:";
+        cin>>username;
+        cout<<"Enter the password:";
+        cin>>password;
+        ofstream file;
+        file.open("username.txt",ios::app);
+        file<<username<<endl<<password<<endl;
+        file.close();
+        log();
+}
+void log()
+{
+    int choice;
+    cout<<"1.Register\n2.Login\nEnter your choice: ";
+    cin>>choice;
+    if(choice==1)
+    {
+         reg();
+    }
+    else if(choice==2)
+    {
+        login();
+    }
+}
+
+int main()
+{
+    log();
+    return 0;
+}
