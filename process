@@ -1,0 +1,55 @@
+#include<iostream>
+using namespace std;
+
+class process
+{
+    public:
+    int Arrival_time;
+    int Program_size;
+    string Process_name;
+    int Execution_time;
+    void initialise();
+    void Execution(std::string*, int*);
+};
+
+    void process::initialise()
+    {
+        cout<<"Enter process name "<<endl;
+        cin>>Process_name;
+        cout<<"Enter program size "<<endl;
+        cin>>Program_size;
+        cout<<"Enter execution time "<<endl;
+        cin>>Execution_time;
+        cout<<"Enter arrival time "<<endl;
+        cin>>Arrival_time;
+    }
+
+    void process::Execution(string NameArray[5],int SizeArray[5])
+
+     {
+
+
+       //round robin scheduling
+
+     }
+
+
+
+    int main()
+    {
+       process ob;
+       process obj[5];
+       for(int i=0; i<5; i++)
+       obj[i].initialise();
+
+       string Names[5];
+       int Execute[5];
+       for(int i=0; i<5; i++)
+       {
+           Names[i]=obj[i].Process_name;
+           Execute[i]=obj[i].Execution_time;
+       }
+
+        ob.Execution(Names, Execute);
+
+    }
