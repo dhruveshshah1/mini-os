@@ -1,0 +1,108 @@
+#include <iostream>
+#include <string.h>
+#include <stdlib.h>
+#include<fstream>
+#include<ctime>
+using namespace std;
+int strcmp(string a,string b);
+void clrscr()
+{
+    system("cls");
+}
+void login()
+{
+    void loginpage();
+    ifstream read;
+    read.open("login.csv");
+    string username,password,un,pw,su;
+    cout<<"Enter username:";
+    cin>>username;
+    while(read.good()==1)
+    {
+        // cout<<read.good();
+        getline(read, un,',');
+        getline(read, pw,',');
+        getline(read,su,'\n');
+       // cout<<su;
+        if(un==username)
+            break;
+    }
+    if(read.good()==0)
+    {
+        cout<<"Username doesn't Exist!\n";
+        loginpage();
+    }
+    else{
+        cout<<"Enter password:";
+        cin>>password;
+    if(un==username && pw == password)
+    {
+        //cout<<un<<pw<<su;
+        if(su=="0")
+            cout<<"SuperUser Logged In!\n";
+        else
+            cout<<"logged in!\n";
+    }
+    else{
+        cout<<"Login failed!\n";
+        
+
+    }
+              
+
+          }
+}
+void newuser()
+{
+    void loginpage();
+    string username,password;
+    cout<<"Enter a user name:";
+    cin>>username;
+    ifstream read;
+    read.open("login.csv");
+    while(read.good()==1)
+    {
+       // string s;
+        string un,p;
+        getline(read,un,',');
+        getline(read,p,'\n');
+        //getline(read,s,'\n');
+        if(un==username)
+        {
+            cout<<"Username Already Exists!\n";
+            newuser();
+        }
+    }
+    read.close();
+    username+=',';
+    cout<<"Enter the password:";
+    cin>>password;
+    password+=',';
+    ofstream file;
+    file.open("login.csv",ios::app);
+    file<<username;
+    file<<password;
+    file<<"0"<<endl;
+    file.close();
+    loginpage();
+}
+void loginpage()
+{
+    int choice;
+    cout<<"1.Login\n2.New User\n";
+    cin>>choice;
+    if(choice==1)
+    {
+        login();
+    }
+    else if(choice==2)
+    {
+        newuser();
+    }
+}
+
+int main()
+{
+    loginpage();
+    return 0;
+}
