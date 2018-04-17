@@ -1,0 +1,75 @@
+#include<iostream>
+#include<windows.h>
+#include<ctime>
+#include<stdlib.h>
+using namespace std;
+
+class process
+{
+    public:
+    int Arrival_time;
+    int Program_size;
+    string Process_name;
+    int Execution_time;
+    void initialise();
+    void Execution(std::string*, int*);
+};
+
+    void process::initialise()
+    {
+        cout<<"Enter process name "<<endl;
+        cin>>Process_name;
+        cout<<"Enter program size "<<endl;
+        cin>>Program_size;
+        cout<<"Enter execution time "<<endl;
+        cin>>Execution_time;
+        cout<<"Enter arrival time "<<endl;
+        cin>>Arrival_time;
+    }
+
+    void process::Execution(string NameArray[5],int SizeArray[5])
+
+     {
+         int qt,fin=0;
+         cout<<"quantum time: "<<endl;
+         cin>>qt;
+         while(fin!=5){
+         for(int i=0;i<5;i++)
+         {
+             if(SizeArray[i]<=0)
+                continue;
+             else{
+                cout<<NameArray[i]<<" executing"<<endl;
+                SizeArray[i]-=qt;
+                if(SizeArray[i]<=0)
+                {
+                    cout<<NameArray[i]<<" finished"<<endl;
+                    fin++;
+                }
+                Sleep(1000);
+             }
+         }
+         }
+     }
+
+
+
+    int main()
+    {
+       process ob;
+       process obj[5];
+       for(int i=0; i<5; i++)
+       obj[i].initialise();
+
+       string Names[5];
+       int Execute[5];
+       for(int i=0; i<5; i++)
+       {
+           Names[i]=obj[i].Process_name;
+           Execute[i]=obj[i].Execution_time;
+       }
+
+        ob.Execution(Names, Execute);
+
+    }
+//p1 10 10 10 p2 10 14 10 p3 10 2 10 p4 10 6 10 p5 10 8 10
