@@ -1,0 +1,49 @@
+#include<iostream>
+#include<stdlib.h>
+#include<string.h>
+#include<fstream>
+using namespace std;
+void firsttime()
+{
+    string f="Free";
+    ofstream write;
+    write.open("SecondaryMemory.csv");
+    write<<"Address"<<","<<"Allocation,"<<"Points To"<<endl;
+    for(int i=0;i<1024;i++)
+    {
+        write<<i<<",";
+        write<<f<<","<<"Null"<<endl;
+    }
+    write.close();
+    write.open("MainMemory.csv");
+    write<<"Address"<<","<<"Allocation,"<<"Points To"<<endl;
+    for(int i=0;i<256;i++)
+    {
+        write<<i<<",";
+        write<<f<<","<<"Null"<<endl;
+    }
+    write.close();
+    write.open("CacheMemory.csv");
+    write<<"Address"<<","<<"Allocation,"<<"Points To"<<endl;
+    for(int i=0;i<4;i++)
+    {
+        write<<i<<",";
+        write<<f<<","<<"Null"<<endl;
+    }
+    write.close();
+    write.open("FAT.csv");
+    write<<"File Name,"<<"Starting Address,"<<"Size"<<endl;
+    write.close();
+    write.open("nofprograms.txt",ios::app);
+    write<<0;
+    write.close();
+}
+void memory()
+{
+    firsttime();
+
+}
+int main()
+{
+    memory();
+}
