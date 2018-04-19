@@ -1,0 +1,96 @@
+#include<iostream>
+#include<windows.h>
+#include<ctime>
+#include<stdlib.h>
+using namespace std;
+void clrscr()
+{
+    system("cls");
+}
+class process
+{
+    public:
+    int Arrival_time;
+    int Program_size;
+    string Process_name;
+    int Execution_time;
+    void initialise();
+    void Execution(std::string*, int*);
+  //  void Display()
+};
+
+    void process::initialise()
+    {
+        cout<<"Enter process name "<<endl;
+        cin>>Process_name;
+        cout<<"Enter program size "<<endl;
+        cin>>Program_size;
+        cout<<"Enter execution time "<<endl;
+        cin>>Execution_time;
+        cout<<"Enter arrival time "<<endl;
+        cin>>Arrival_time;
+    }
+
+    void process::Execution(string NameArray[5],int SizeArray[5])
+
+     {
+         int qt,fin=0;
+         cout<<"quantum time: "<<endl;
+         cin>>qt;
+       //  string current;
+         while(fin!=5){
+         for(int i=0;i<5;i++)
+         {
+             if(SizeArray[i]<=0)
+                continue;
+             else{
+               // cout<<NameArray[i]<<" executing"<<endl;
+                SizeArray[i]-=qt;
+                if(SizeArray[i]<=0)
+                {
+                   // cout<<NameArray[i]<<" finished"<<endl;
+                    fin++;
+                }
+                clrscr();
+                cout<<"\nWaiting:"<<"\t";
+                for(int j=0;j<5;j++)
+                {
+                    if(j!=i && SizeArray[j]>0)
+                        cout<<NameArray[j]<<"\t";
+                }
+
+                cout<<"\nExecuting:"<<"\t";
+                cout<<NameArray[i]<<"\t";
+
+                cout<<"\nFinished:"<<"\t";
+                for(int j=0;j<5;j++)
+                {
+                    if(SizeArray[j]<=0)
+                        cout<<NameArray[j]<<"\t";
+                }
+
+
+                Sleep(1000);
+             }
+         }
+         }
+     }
+
+    int main()
+    {
+       process ob;
+       process obj[5];
+       for(int i=0; i<5; i++)
+       obj[i].initialise();
+
+       string Names[5];
+       int Execute[5];
+       for(int i=0; i<5; i++)
+       {
+           Names[i]=obj[i].Process_name;
+           Execute[i]=obj[i].Execution_time;
+       }
+
+        ob.Execution(Names, Execute);
+
+    }
